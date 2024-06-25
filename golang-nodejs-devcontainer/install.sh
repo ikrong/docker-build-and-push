@@ -2,6 +2,8 @@
 
 set -e
 
+echo "::group::Installing Go tools"
+
 GO_PATH="$GOPATH"
 
 # install go 1.21.11
@@ -33,12 +35,17 @@ echo "$GO_TOOLS" | xargs -n 1 go install -v
 
 mv /tmp/gotools/bin/* $GO_PATH/bin/
 
-cd /tmp
+cd /tmp/
 
 curl -fsSL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | \
 sh -s -- -b "${GO_PATH}/bin" "v1.59.1"
 
+echo "::endgroup::"
+
 # install nodejs
+
+echo "::group::Installing Node.js"
+
 updaterc() {
     local _bashrc
     local _zshrc
@@ -71,4 +78,6 @@ nvm install $NODE_VERSION
 nvm alias default $NODE_VERSION
 nvm use default
 
-rm -rf /tmp
+echo "::endgroup::"
+
+rm -rf /tmp/gotools

@@ -14,8 +14,6 @@ ENV PATH=$PATH:$NVM_DIR/current/bin
 ENV GO_VERSION=1.21.11
 ENV NODE_VERSION=18
 
-WORKDIR /devcontainers
+COPY ./install.sh /install.sh
 
-COPY . .
-
-RUN ./install.sh
+RUN /install.sh

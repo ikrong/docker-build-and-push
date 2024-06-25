@@ -65,7 +65,8 @@ EOF
 )"
 updaterc "${nvm_rc_snippet}"
 
-su -c "${nvm_install_snippet}" 2>&1
+[ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
+[ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
 
 nvm install $NODE_VERSION
 nvm alias default $NODE_VERSION

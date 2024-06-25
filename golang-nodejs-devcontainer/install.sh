@@ -2,8 +2,6 @@
 
 set -e
 
-mkdir -p "$GOROOT" "$GOPATH"
-
 GO_PATH="$GOPATH"
 
 # install go 1.21.11
@@ -16,7 +14,7 @@ go version
 export GOPATH=/tmp/gotools
 export GOCACHE=/tmp/gotools/cache
 
-mkdir -p $GOPATH $GOCACHE
+mkdir -p $GOCACHE $GO_PATH/bin
 
 cd /tmp/gotools
 

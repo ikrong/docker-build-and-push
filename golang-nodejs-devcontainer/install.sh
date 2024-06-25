@@ -39,8 +39,32 @@ curl -fsSL https://raw.githubusercontent.com/golangci/golangci-lint/master/insta
 sh -s -- -b "${GO_PATH}/bin" "v1.59.1"
 
 # install nodejs
+updaterc() {
+    local _bashrc
+    local _zshrc
+    _bashrc=/etc/bash.bashrc
+    _zshrc=/etc/zsh/zshrc
+    echo "Updating ${_bashrc} and ${_zshrc}..."
+    if [[ "$(cat ${_bashrc})" != *"$1"* ]]; then
+        echo -e "$1" >> "${_bashrc}"
+    fi
+    if [ -f "${_zshrc}" ] && [[ "$(cat ${_zshrc})" != *"$1"* ]]; then
+        echo -e "$1" >> "${_zshrc}"
+    fi
+}
+
 mkdir -p $NVM_DIR
+
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+nvm_rc_snippet="$(cat << EOF
+export NVM_DIR="${NVM_DIR}"
+[ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
+[ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
+EOF
+)"
+updaterc "${nvm_rc_snippet}"
+
 nvm install $NODE_VERSION
 nvm alias default $NODE_VERSION
 nvm use default

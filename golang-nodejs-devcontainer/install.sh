@@ -65,6 +65,8 @@ EOF
 )"
 updaterc "${nvm_rc_snippet}"
 
+su -c "${nvm_install_snippet}" 2>&1
+
 nvm install $NODE_VERSION
 nvm alias default $NODE_VERSION
 nvm use default

@@ -20,7 +20,7 @@ on:
                 default: "linux/amd64,linux/arm64"
 
 jobs:
-    copy:
+    build:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout

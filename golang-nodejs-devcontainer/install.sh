@@ -39,7 +39,7 @@ curl -fsSL https://raw.githubusercontent.com/golangci/golangci-lint/master/insta
 sh -s -- -b "${GO_PATH}/bin" "v1.59.1"
 
 # install nodejs
-
+mkdir -p $NVM_DIR
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install $NODE_VERSION
 nvm alias default $NODE_VERSION

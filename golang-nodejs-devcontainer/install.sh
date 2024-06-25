@@ -55,7 +55,9 @@ updaterc() {
 
 mkdir -p $NVM_DIR
 
+export PROFILE=/dev/null
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+source "${NVM_DIR}/nvm.sh"
 
 nvm_rc_snippet="$(cat << EOF
 export NVM_DIR="${NVM_DIR}"
@@ -64,9 +66,6 @@ export NVM_DIR="${NVM_DIR}"
 EOF
 )"
 updaterc "${nvm_rc_snippet}"
-
-[ -s "\$NVM_DIR/nvm.sh" ] && . "\$NVM_DIR/nvm.sh"
-[ -s "\$NVM_DIR/bash_completion" ] && . "\$NVM_DIR/bash_completion"
 
 nvm install $NODE_VERSION
 nvm alias default $NODE_VERSION

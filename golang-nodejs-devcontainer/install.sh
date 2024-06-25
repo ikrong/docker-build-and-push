@@ -6,7 +6,7 @@ set -e
 wget -q -O /tmp/go.tar.gz https://go.dev/dl/go$GO_VERSION.linux-$TARGETARCH.tar.gz
 tar -C /usr/local -xzf /tmp/go.tar.gz
 rm -rf /tmp/go.tar.gz
-go version
+go env
 
 # install go tools
 export GOPATH=/tmp/gotools
@@ -16,6 +16,7 @@ mkdir -p $GOPATH $GOCACHE
 
 cd /tmp/gotools
 
+go env
 GO_TOOLS="\
     golang.org/x/tools/gopls@latest \
     honnef.co/go/tools/cmd/staticcheck@latest \

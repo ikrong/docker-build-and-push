@@ -3,7 +3,6 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu-22.04
 ARG TARGETOS
 ARG TARGETARCH
 
-ENV GO111MODULE=on
 ENV GOROOT=/usr/local/go
 ENV GOPATH=/go
 ENV PATH=$PATH:$GOROOT/bin:$GOPATH/bin

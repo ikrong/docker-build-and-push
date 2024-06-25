@@ -33,10 +33,10 @@ echo "$GO_TOOLS" | xargs -n 1 go install -v
 
 mv /tmp/gotools/bin/* $GO_PATH/bin/
 
-rm -rf /tmp
+cd /tmp
 
 curl -fsSL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | \
-sh -s -- -b "${GO_PATH}/bin" "1.59.1"
+sh -s -- -b "${GO_PATH}/bin" "v1.59.1"
 
 # install nodejs
 
@@ -44,3 +44,5 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install $NODE_VERSION
 nvm alias default $NODE_VERSION
 nvm use default
+
+rm -rf /tmp

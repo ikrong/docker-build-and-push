@@ -36,7 +36,7 @@ mv /tmp/gotools/bin/* $GO_PATH/bin/
 rm -rf /tmp
 
 curl -fsSL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | \
-sh -s -- -b "${GO_PATH}/bin" "v1.59.1"
+sh -s -- -b "${GO_PATH}/bin" "1.59.1"
 
 # install nodejs
 

@@ -1,0 +1,49 @@
+name: Build And Push
+on:
+    workflow_dispatch:
+        inputs:
+            context:
+                description: "构建根目录"
+                required: true
+                default: ""
+            dockerfile_path:
+                description: "dockerfile路径"
+                required: true
+                default: "Dockerfile"
+            tag:
+                description: "镜像tag (格式 repo:tag)"
+                required: true
+                default: ""
+            platforms:
+                description: "构建平台"
+                required: true
+                default: "linux/amd64,linux/arm64"
+
+jobs:
+    copy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Set up QEMU
+              uses: docker/setup-qemu-action@v3
+
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            - name: Docker Login
+              uses: docker/login-action@v3.2.0
+              with:
+                  registry: registry.cn-beijing.aliyuncs.com
+                  username: ${{ secrets.USERNAME }}
+                  password: ${{ secrets.PASSWORD }}
+
+            - name: Build and push Docker images
+              uses: docker/build-push-action@v6.1.0
+              with:
+                  context: ${{ github.event.inputs.context }}
+                  file: ${{ github.event.inputs.context }}/${{ github.event.inputs.dockerfile_path }}
+                  platforms: ${{ github.event.inputs.platforms }}
+                  push: true
+                  tags: registry.cn-beijing.aliyuncs.com/ikrong/${{ github.event.inputs.tag }}

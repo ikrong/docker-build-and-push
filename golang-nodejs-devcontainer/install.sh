@@ -33,7 +33,7 @@ GO_TOOLS="\
 
 echo "$GO_TOOLS" | xargs -n 1 go install -v
 
-mv /tmp/gotools/bin/* $GO_PATH/bin
+mv /tmp/gotools/bin/* $GO_PATH/bin/
 
 rm -rf /tmp
 

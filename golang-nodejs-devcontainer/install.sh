@@ -3,7 +3,7 @@
 set -e
 
 # install go 1.21.11
-wget -O /tmp/go.tar.gz https://go.dev/dl/go$GO_VERSION.linux-$TARGETARCH.tar.gz
+wget -q -O /tmp/go.tar.gz https://go.dev/dl/go$GO_VERSION.linux-$TARGETARCH.tar.gz
 tar -C /usr/local -xzf /tmp/go.tar.gz
 rm -rf /tmp/go.tar.gz
 go version
@@ -13,6 +13,8 @@ export GOPATH=/tmp/gotools
 export GOCACHE=/tmp/gotools/cache
 
 mkdir -p $GOPATH $GOCACHE
+
+cd /tmp/gotools
 
 GO_TOOLS="\
     golang.org/x/tools/gopls@latest \
@@ -28,6 +30,7 @@ GO_TOOLS="\
 echo "$GO_TOOLS" | xargs -n 1 go install -v
 
 mv /tmp/gotools/bin/* $GOPATH/bin
+
 rm -rf /tmp
 
 curl -fsSL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | \
